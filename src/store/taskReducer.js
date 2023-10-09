@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getData, postData } from "../services/ApiClient";
 
-export const GET_TASK = "GET_TASK";
-export const UPDATE_TASK = "UPDATE_TASK";
-export const TASK_ERROR = "TASK_ERROR";
-
 const initialState = {
   tasks: [],
+  task: [],
 };
 
 const tasks = createSlice({
@@ -57,7 +54,7 @@ const tasks = createSlice({
     getTask: (state, action) => {
       const allTasks = getData(`tasks`);
       const singleTask = allTasks.filter((task) => task.id === action.payload);
-      state.tasks = singleTask[0];
+      state.task = singleTask[0];
     },
   },
 });

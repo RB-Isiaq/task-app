@@ -8,7 +8,7 @@ import { deleteTask, getTask } from "../../../store/taskReducer";
 const TaskDetail = () => {
   const [deleting, setDeleting] = useState(false);
   const { id } = useParams();
-  const { tasks } = useSelector((state) => state.tasks);
+  const { task } = useSelector((state) => state.tasks);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -28,11 +28,7 @@ const TaskDetail = () => {
   };
 
   return (
-    <TaskDetails
-      data={tasks}
-      deleteHandler={handleDelete}
-      deleting={deleting}
-    />
+    <TaskDetails data={task} deleteHandler={handleDelete} deleting={deleting} />
   );
 };
 

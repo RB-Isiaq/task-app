@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Tasks from "../../components/Tasks";
 import { getData } from "../../services/ApiClient";
@@ -8,16 +8,17 @@ import { storeUser } from "../../store/userReducer";
 
 const UserPage = () => {
   const [sort, setSort] = useState(null);
-
   const dispatch = useDispatch();
+
+  const { tasks } = useSelector((state) => state.tasks);
+  const { name } = useSelector((state) => state.user);
   const user = getData("user");
 
   dispatch(storeUser({ ...user }));
 
-  dispatch(getAllTasks());
-
-  const { name } = useSelector((state) => state.user);
-  const { tasks } = useSelector((state) => state.tasks);
+  useEffect(() => {
+    dispatch(getAllTasks());
+  }, []);
 
   return (
     <section className="relative w-full max-w-[600px] flex items-center flex-col mb-4 min-h-screen">
